@@ -4,41 +4,26 @@ Plan a meal by chatting with your AI assistant, then cook it together in the Int
 dish is written so the app can share the work between the people cooking and guide each of them,
 step by step, hands-free.
 
-## What's here
-
-| Plugin | Who it's for | Address |
-|---|---|---|
-| `intellichef-staging` | Invited testers, trying what's coming next | `https://mcp.intellichef.io/mcp` |
-
-A plugin simply connects your assistant to IntelliChef. Everything it knows how to do lives on
-IntelliChef's side, so it stays up to date on its own — there is nothing to reinstall.
-
-## Add it to your assistant
+| Plugin | Who it's for |
+|---|---|
+| **IntelliChef (staging)** | Invited testers, trying what's coming next |
 
 You'll need an IntelliChef account to cook what you plan.
 
-### The quickest way: paste the address
+## Add it to ChatGPT
 
-Add IntelliChef as a custom connector, using this address, with no sign-in:
+1. Open **Plugins**, press **Add**, and choose **Add a marketplace**.
+2. Enter `intellichef-ai/agent-plugins`.
+3. That adds IntelliChef's marketplace, but not the plugin yet. Open the marketplace, choose the
+   plugin from the table above, and press **Install**.
 
-- IntelliChef (staging): `https://mcp.intellichef.io/mcp`
+## Add it to Claude
 
-- **Claude** (web, desktop or mobile): Customize → Connectors → **Add custom connector** → paste the
-  address → choose no sign-in.
-- **ChatGPT**: Plugins → **+** → **Add custom MCP server** → paste the address → choose no
-  authentication.
+On the web, the desktop app or the mobile app:
 
-### Or install the plugin
-
-- **Claude**: Customize → Plugins → **Add marketplace** → enter `intellichef-ai/agent-plugins`, then
-  install the plugin. Or download the plugin's zip file from
-  [Releases](https://github.com/intellichef-ai/agent-plugins/releases), then Add → **Upload plugin**.
-- **ChatGPT**: download the plugin's zip file from
-  [Releases](https://github.com/intellichef-ai/agent-plugins/releases), then Plugins → **+** →
-  **Upload plugin archive**.
-- **Claude Code**: `/plugin marketplace add intellichef-ai/agent-plugins`, then
-  `/plugin install <plugin>@intellichef`.
-- **Codex**: `codex plugin marketplace add intellichef-ai/agent-plugins`.
+1. Open **Customize**, then **Plugins**, press **Add**, and choose **Add marketplace**.
+2. Choose **Add from a repository**, and enter `intellichef-ai/agent-plugins`.
+3. Claude shows the plugins it found there. Press **Add** beside the one from the table above.
 
 ## Using it
 
@@ -46,6 +31,39 @@ Start a new chat and plan a meal the way you normally would: what you feel like,
 much time you have. When it looks right, ask your assistant to cook it in IntelliChef. It will give
 you a link that opens the meal in the app.
 
+Once installed, the plugin keeps itself up to date. Everything it knows how to do lives on
+IntelliChef's side, so there's nothing to reinstall.
+
+## Other ways to add it
+
+### Upload the plugin file
+
+If adding the marketplace doesn't work for you, download the plugin's zip file from
+[Releases](https://github.com/intellichef-ai/agent-plugins/releases) and upload it:
+
+- **ChatGPT:** **Plugins**, then **Add**, then **Upload plugin archive**.
+- **Claude:** **Customize**, then **Plugins**, then **Add**, then **Upload plugin**.
+
+A plugin added this way doesn't update on its own: download the newest zip when a new release comes
+out.
+
+### Paste the address
+
+Both assistants can also connect to IntelliChef directly, without a plugin, as a custom connector:
+
+- **ChatGPT:** **Plugins**, then **Add**, then **Add custom MCP server**.
+- **Claude:** **Customize**, then **Connectors**, then **Add custom connector**.
+
+Paste this address, and choose no sign-in:
+
+- IntelliChef (staging): `https://mcp.intellichef.io/mcp`
+
+### For developers
+
+- **Claude Code:** `/plugin marketplace add intellichef-ai/agent-plugins`, then
+  `/plugin install <plugin>@intellichef`.
+- **Codex:** `codex plugin marketplace add intellichef-ai/agent-plugins`.
+
 ---
 
-Built from intellichef@76c636a.
+Built from intellichef@c943679.
