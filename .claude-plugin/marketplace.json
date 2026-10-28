@@ -1,0 +1,13 @@
+{
+  "name": "intellichef",
+  "owner": {
+    "name": "IntelliChef"
+  },
+  "plugins": [
+    {
+      "name": "intellichef-staging",
+      "source": "./plugins/intellichef-staging",
+      "description": "Plan a meal in conversation and get it ready to cook together in the IntelliChef app: every dish written so the app can split the work between cooks and guide each of them, hands-free. A preview for invited testers."
+    }
+  ]
+}

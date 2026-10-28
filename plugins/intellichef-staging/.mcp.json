@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "intellichef-staging": {
+      "type": "http",
+      "url": "https://mcp.intellichef.io/mcp"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+# Publishes a release when main carries a plugin version that has not been released yet: tag
+# v<version>, with a zip of each plugin — what ChatGPT's "Upload plugin archive" and Claude's
+# "Upload plugin" take. A push that keeps the version (a README edit, say) releases nothing, and a
+# release is never changed once made: ChatGPT caches an install by its version.
+name: release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency: release
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Which version
+        id: version
+        run: |
+          versions="$(jq -r .version plugins/*/plugin.json | sort -u)"
+          if [ "$(echo "$versions" | wc -l)" -ne 1 ]; then
+            echo "::error::the plugins disagree on their version: $versions"; exit 1
+          fi
+          if ! echo "$versions" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || [ "$versions" = "0.0.0" ]; then
+            echo "::error::not a release version: $versions"; exit 1
+          fi
+          echo "tag=v$versions" >> "$GITHUB_OUTPUT"
+      - name: Released already?
+        id: seen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "${{ steps.version.outputs.tag }} is released already — nothing to do"
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Zip each plugin
+        if: steps.seen.outputs.released != 'true'
+        run: |
+          mkdir -p out
+          for dir in plugins/*/; do
+            name="$(basename "$dir")"
+            # THE PLUGIN'S OWN FILES AT THE ZIP'S ROOT, as both upload forms expect.
+            (cd "$dir" && zip -qr "../../out/$name.zip" .)
+          done
+          ls -l out
+      - name: Release
+        if: steps.seen.outputs.released != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" out/*.zip \
+            --target "$GITHUB_SHA" --title "${{ steps.version.outputs.tag }}" \
+            --notes "$(tail -n 1 README.md)"

@@ -1,0 +1,20 @@
+{
+  "name": "intellichef",
+  "interface": {
+    "displayName": "IntelliChef"
+  },
+  "plugins": [
+    {
+      "name": "intellichef-staging",
+      "source": {
+        "source": "local",
+        "path": "./plugins/intellichef-staging"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Lifestyle"
+    }
+  ]
+}

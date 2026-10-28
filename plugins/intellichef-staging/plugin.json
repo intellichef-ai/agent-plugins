@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "intellichef-staging",
+  "version": "0.1.0",
+  "description": "Plan a meal in conversation and get it ready to cook together in the IntelliChef app: every dish written so the app can split the work between cooks and guide each of them, hands-free. A preview for invited testers.",
+  "author": {
+    "name": "IntelliChef"
+  },
+  "homepage": "https://github.com/intellichef-ai/agent-plugins"
+}

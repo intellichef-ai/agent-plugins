@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "intellichef-staging": {
+      "type": "streamable-http",
+      "url": "https://mcp.intellichef.io/mcp"
+    }
+  }
+}
